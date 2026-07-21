@@ -383,6 +383,25 @@ input.sheen-datepicker {
 .sheen-form-submit { width: 100%; margin-top: 0.5rem; padding: 1rem; border: none; border-radius: 12px; background: #FF5A47; color: #fff; font-family: var(--wp--preset--font-family--display); font-weight: 600; font-size: 1.05rem; cursor: pointer; transition: filter .15s; }
 .sheen-form-submit:hover { filter: brightness(1.06); }
 .sheen-form-note { text-align: center; color: #8A99A8; font-size: 0.85rem; margin: 0.85rem 0 0; }
+/* Fluent Forms output — restyled to match the brand */
+.sheen-form .ff-el-group { margin-bottom: 1.1rem; }
+.sheen-form .ff-el-input--label label { font-size: 0.85rem; font-weight: 600; color: #5A6B7B; margin-bottom: 0.4rem; }
+.sheen-form .ff-el-input--label .ff-el-is-required::after { color: #FF5A47; }
+.sheen-form .ff-el-form-control {
+	width: 100%; box-sizing: border-box; padding: 0.8rem 0.9rem; border: 1px solid #E3EAF1; border-radius: 10px;
+	font: inherit; color: #0B1F3A; background: #fff; transition: border-color .15s, box-shadow .15s;
+}
+.sheen-form .ff-el-form-control:focus { outline: none; border-color: #FF5A47; box-shadow: 0 0 0 3px rgba(255,90,71,0.15); }
+.sheen-form textarea.ff-el-form-control { min-height: 120px; resize: vertical; }
+.sheen-form .ff-btn-submit {
+	width: 100%; margin-top: 0.5rem; padding: 1rem 1.5rem; border: none; border-radius: 12px;
+	background: #FF5A47 !important; color: #fff !important; font-family: var(--wp--preset--font-family--display); font-weight: 600; font-size: 1.05rem; cursor: pointer; transition: filter .15s;
+}
+.sheen-form .ff-btn-submit:hover { filter: brightness(1.06); }
+.sheen-form .ff-message-success { background: #EAF9F1; border: 1px solid #B7E7CE; color: #0B7A46; padding: 1.1rem 1.3rem; border-radius: 12px; font-weight: 500; }
+.sheen-form .ff-el-is-error .ff-el-form-control { border-color: #FF5A47; }
+.sheen-form .error, .sheen-form .text-danger, .sheen-form .ff-el-is-error-message { color: #E8442F; font-size: 0.85rem; margin-top: 0.35rem; }
+
 .sheen-contact-aside { background: var(--sheen-surface); border-radius: 20px; padding: 2rem; }
 .sheen-contact-aside h3 { font-family: var(--wp--preset--font-family--display); margin: 0 0 .5rem; }
 .sheen-contact-list { list-style: none; padding: 0; margin: 1.25rem 0; display: grid; gap: 1rem; }

@@ -15,23 +15,18 @@
 		<div class="sheen-contact-formwrap sheen-reveal">
 			<p class="sheen-eyebrow" style="color:#FF5A47;margin:0 0 .5rem">Request a quote</p>
 			<h2 style="font-family:var(--wp--preset--font-family--display);font-weight:700;letter-spacing:-.02em;margin:0 0 1.5rem;font-size:clamp(1.9rem,3.5vw,2.6rem)">Book your clean</h2>
-			<form class="sheen-form" onsubmit="return false;">
-				<div class="sheen-form-row">
-					<label>Full name<input type="text" placeholder="Jane Doe" required></label>
-					<label>Email<input type="email" placeholder="you@email.com" required></label>
-				</div>
-				<div class="sheen-form-row">
-					<label>Phone<input type="tel" placeholder="(555) 000-0000"></label>
-					<label>Service<select class="sheen-select2"><option value="">Choose a service…</option><option>Home Cleaning</option><option>Office Cleaning</option><option>Deep Clean</option><option>Move In / Move Out</option><option>Carpet &amp; Upholstery</option><option>Window Cleaning</option></select></label>
-				</div>
-				<div class="sheen-form-row">
-					<label>Address<input type="text" placeholder="123 Main St, City"></label>
-					<label>Preferred date<input type="text" class="sheen-datepicker" placeholder="Select a date" readonly></label>
-				</div>
-				<label>Special notes<textarea rows="4" placeholder="Pets, parking, areas to focus on…"></textarea></label>
-				<button type="submit" class="sheen-form-submit">Get my free quote →</button>
-				<p class="sheen-form-note">We'll reply within 1 business hour. No spam, ever.</p>
-			</form>
+			<div class="sheen-form">
+			<?php
+			// Booking form via Fluent Forms. Set your form ID here after import.
+			// Falls back to a note if the plugin/form isn't present so the theme never hard-breaks.
+			$sheen_form_id = 4;
+			if ( shortcode_exists( 'fluentform' ) ) {
+				echo do_shortcode( '[fluentform id="' . (int) $sheen_form_id . '"]' );
+			} else {
+				echo '<p class="sheen-form-note">Install the <strong>Fluent Forms</strong> plugin and set your booking form ID in <code>patterns/contact-form.php</code> to enable the quote form.</p>';
+			}
+			?>
+			</div>
 		</div>
 
 		<aside class="sheen-contact-aside sheen-reveal">
