@@ -33,6 +33,8 @@
 			<h3>Get your quote</h3>
 			<label>Full name<input type="text" placeholder="Jane Doe" /></label>
 			<label>Service<select class="sheen-select2"><option value="">Choose a service…</option><option>Home Cleaning</option><option>Office Cleaning</option><option>Deep Clean</option><option>Move In / Move Out</option><option>Carpet &amp; Upholstery</option><option>Window Cleaning</option></select></label>
+			<label>Home size<select class="sheen-select2"><option value="">Select home size</option><option>Studio / Bedsitter</option><option>1 Bedroom</option><option>2 Bedrooms</option><option>3 Bedrooms</option><option>4 Bedrooms</option><option>5+ Bedrooms</option><option>Office / Commercial</option></select></label>
+			<label>Number of rooms<input type="number" min="1" max="50" placeholder="e.g. 4" /></label>
 			<label>Preferred date<input type="text" class="sheen-datepicker" placeholder="Select a date" readonly /></label>
 			<a class="sheen-cta-card-btn" href="/contact">See my price →</a>
 			<p class="sheen-cta-card-note">No spam. No card required.</p>
