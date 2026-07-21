@@ -29,7 +29,7 @@
 		<!-- wp:column {"className":"is-style-lift","style":{"border":{"radius":"22px","color":"#E3EAF1","width":"1px"},"spacing":{"padding":{"top":"0","bottom":"1.75rem","left":"0","right":"0"}}},"backgroundColor":"base"} -->
 		<div class="wp-block-column is-style-lift has-base-background-color has-background has-border-color" style="border-color:#E3EAF1;border-width:1px;border-radius:22px;padding-top:0;padding-right:0;padding-bottom:1.75rem;padding-left:0">
 			<!-- wp:image {"aspectRatio":"4/3","scale":"cover","sizeSlug":"large","style":{"border":{"radius":{"topLeft":"22px","topRight":"22px"}}}} -->
-			<figure class="wp-block-image size-large" style="border-top-left-radius:22px;border-top-right-radius:22px"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/cleaning/mopping-dining.jpg' ) ); ?>" alt="SparkleWave team deep-cleaning a home" style="aspect-ratio:4/3;object-fit:cover"/></figure>
+			<figure class="wp-block-image size-large" style="border-top-left-radius:22px;border-top-right-radius:22px"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/cleaning/mopping-dining.jpg' ) ); ?>" alt="HuBei-Cleaning team deep-cleaning a home" style="aspect-ratio:4/3;object-fit:cover"/></figure>
 			<!-- /wp:image -->
 			<!-- wp:group {"style":{"spacing":{"padding":{"left":"1.5rem","right":"1.5rem"}}},"layout":{"type":"constrained"}} -->
 			<div class="wp-block-group" style="padding-left:1.5rem;padding-right:1.5rem">
@@ -50,7 +50,7 @@
 		<!-- wp:column {"className":"is-style-lift","style":{"border":{"radius":"22px","color":"#E3EAF1","width":"1px"},"spacing":{"padding":{"top":"0","bottom":"1.75rem","left":"0","right":"0"}}},"backgroundColor":"base"} -->
 		<div class="wp-block-column is-style-lift has-base-background-color has-background has-border-color" style="border-color:#E3EAF1;border-width:1px;border-radius:22px;padding-top:0;padding-right:0;padding-bottom:1.75rem;padding-left:0">
 			<!-- wp:image {"aspectRatio":"4/3","scale":"cover","sizeSlug":"large","style":{"border":{"radius":{"topLeft":"22px","topRight":"22px"}}}} -->
-			<figure class="wp-block-image size-large" style="border-top-left-radius:22px;border-top-right-radius:22px"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/cleaning/cleaner-uniform.jpg' ) ); ?>" alt="SparkleWave cleaner in uniform at an office" style="aspect-ratio:4/3;object-fit:cover"/></figure>
+			<figure class="wp-block-image size-large" style="border-top-left-radius:22px;border-top-right-radius:22px"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/cleaning/cleaner-uniform.jpg' ) ); ?>" alt="HuBei-Cleaning cleaner in uniform at an office" style="aspect-ratio:4/3;object-fit:cover"/></figure>
 			<!-- /wp:image -->
 			<!-- wp:group {"style":{"spacing":{"padding":{"left":"1.5rem","right":"1.5rem"}}},"layout":{"type":"constrained"}} -->
 			<div class="wp-block-group" style="padding-left:1.5rem;padding-right:1.5rem">
@@ -71,7 +71,7 @@
 		<!-- wp:column {"className":"is-style-lift","style":{"border":{"radius":"22px","color":"#E3EAF1","width":"1px"},"spacing":{"padding":{"top":"0","bottom":"1.75rem","left":"0","right":"0"}}},"backgroundColor":"base"} -->
 		<div class="wp-block-column is-style-lift has-base-background-color has-background has-border-color" style="border-color:#E3EAF1;border-width:1px;border-radius:22px;padding-top:0;padding-right:0;padding-bottom:1.75rem;padding-left:0">
 			<!-- wp:image {"aspectRatio":"4/3","scale":"cover","sizeSlug":"large","style":{"border":{"radius":{"topLeft":"22px","topRight":"22px"}}}} -->
-			<figure class="wp-block-image size-large" style="border-top-left-radius:22px;border-top-right-radius:22px"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/cleaning/crew-equipment.jpg' ) ); ?>" alt="SparkleWave crew arriving with cleaning equipment" style="aspect-ratio:4/3;object-fit:cover"/></figure>
+			<figure class="wp-block-image size-large" style="border-top-left-radius:22px;border-top-right-radius:22px"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/cleaning/crew-equipment.jpg' ) ); ?>" alt="HuBei-Cleaning crew arriving with cleaning equipment" style="aspect-ratio:4/3;object-fit:cover"/></figure>
 			<!-- /wp:image -->
 			<!-- wp:group {"style":{"spacing":{"padding":{"left":"1.5rem","right":"1.5rem"}}},"layout":{"type":"constrained"}} -->
 			<div class="wp-block-group" style="padding-left:1.5rem;padding-right:1.5rem">

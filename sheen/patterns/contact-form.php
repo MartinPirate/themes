@@ -34,7 +34,7 @@
 			<p>Prefer to chat? We're friendly and fast.</p>
 			<ul class="sheen-contact-list">
 				<li><span>📞</span><a href="tel:+15558880000">(555) 888-0000</a></li>
-				<li><span>✉</span><a href="mailto:hello@sparklewave.com">hello@sparklewave.com</a></li>
+				<li><span>✉</span><a href="mailto:hello@hubei-cleaning.com">hello@hubei-cleaning.com</a></li>
 				<li><span>📍</span>123 Sparkle Ave, Suite 100</li>
 				<li><span>🕒</span>Mon–Sat, 8:00 AM – 6:00 PM</li>
 			</ul>

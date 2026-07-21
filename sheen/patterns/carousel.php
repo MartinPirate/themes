@@ -22,7 +22,7 @@ $slides = array(
 	<p class="sheen-eyebrow sheen-reveal has-text-align-center has-primary-color has-text-color" style="margin-bottom:0.5rem">Our recent work</p>
 	<!-- /wp:paragraph -->
 	<!-- wp:heading {"textAlign":"center","className":"sheen-reveal","style":{"spacing":{"margin":{"bottom":"var:preset|spacing|60"}}}} -->
-	<h2 class="wp-block-heading has-text-align-center sheen-reveal" style="margin-bottom:var(--wp--preset--spacing--60)">See the SparkleWave difference</h2>
+	<h2 class="wp-block-heading has-text-align-center sheen-reveal" style="margin-bottom:var(--wp--preset--spacing--60)">See the HuBei-Cleaning difference</h2>
 	<!-- /wp:heading -->
 
 	<!-- wp:html -->

@@ -14,10 +14,10 @@ $img = esc_url( get_theme_file_uri( 'assets/images/cleaning/woman-mopping.jpg' )
 	<!-- wp:html -->
 	<div class="alignwide sheen-split" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center">
 		<div class="sheen-reveal" style="border-radius:26px;overflow:hidden;box-shadow:0 30px 70px rgba(11,31,58,0.18)">
-			<img src="<?php echo $img; ?>" alt="SparkleWave cleaner mopping a bright home" data-parallax="0.12" style="width:100%;height:520px;object-fit:cover;display:block"/>
+			<img src="<?php echo $img; ?>" alt="HuBei-Cleaning cleaner mopping a bright home" data-parallax="0.12" style="width:100%;height:520px;object-fit:cover;display:block"/>
 		</div>
 		<div>
-			<p class="sheen-eyebrow sheen-reveal" style="color:#FF5A47;margin:0 0 .5rem">Why SparkleWave</p>
+			<p class="sheen-eyebrow sheen-reveal" style="color:#FF5A47;margin:0 0 .5rem">Why HuBei-Cleaning</p>
 			<h2 class="sheen-reveal" style="font-family:var(--wp--preset--font-family--display);font-weight:700;letter-spacing:-0.02em;line-height:1.08;font-size:clamp(1.9rem,3.5vw,2.75rem);margin:0 0 1.25rem">Cleaning you can actually trust</h2>
 			<ul style="list-style:none;padding:0;margin:0;display:grid;gap:1.1rem">
 				<li class="sheen-reveal" style="display:flex;gap:.9rem"><span style="color:#12B7A8;font-size:1.3rem">✓</span><span><strong>Vetted, background-checked pros</strong> — the same friendly faces every visit.</span></li>

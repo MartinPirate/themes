@@ -90,7 +90,7 @@ if ( ! function_exists( 'sheen_body_open_markup' ) ) {
 		?>
 		<div class="sheen-preloader" aria-hidden="true">
 			<div class="sheen-preloader-inner">
-				<span class="sheen-preloader-mark">SparkleWave</span>
+				<span class="sheen-preloader-mark">HuBei-Cleaning</span>
 				<span class="sheen-preloader-bar"><span></span></span>
 			</div>
 		</div>
