@@ -1,0 +1,492 @@
+/* =========================================================================
+   Sheen — front-end styles (motion, layout polish, sections, dark mode)
+   theme.json owns tokens/colors; this owns behavior + section chrome.
+   ========================================================================= */
+
+:root {
+	--sheen-ink: #0B1F3A;
+	--sheen-ink-deep: #071528;
+	--sheen-primary: #FF5A47;
+	--sheen-secondary: #12B7A8;
+	--sheen-accent: #FFD23F;
+	--sheen-surface: #F3F7FB;
+	--sheen-hairline: #E3EAF1;
+}
+
+/* ---- Reveal animation initial states (only when JS is active) ---------- */
+.sheen-js [data-reveal],
+.sheen-js .sheen-reveal { opacity: 0; transform: translateY(40px); will-change: transform, opacity; }
+
+/* ---- Header: kill default banding, tighten the two-tier bar ------------ */
+.sheen-header { margin-block: 0 !important; }
+.sheen-header .sheen-utilitybar,
+.sheen-header .sheen-nav { margin-block: 0 !important; }
+.sheen-header .sheen-utilitybar { border-bottom: 1px solid rgba(255,255,255,0.06); }
+.sheen-nav .wp-block-navigation a:hover { color: var(--sheen-secondary); }
+.sheen-header .wp-block-buttons { margin-block: 0; }
+
+/* Sticky, blurred header on scroll-ready sites feels premium. */
+.wp-site-blocks > header.sheen-header { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(140%) blur(2px); }
+
+/* Kill the white banding between header and hero (WP top-level block margins). */
+.wp-site-blocks > main,
+.wp-site-blocks > header + main,
+main.wp-block-group { margin-block: 0 !important; padding-block: 0 !important; }
+.sheen-header .sheen-nav { margin-block-end: 0 !important; }
+
+/* ---- Hero: full viewport video background ------------------------------ */
+.sheen-hero {
+	position: relative; overflow: hidden; isolation: isolate;
+	min-height: 100vh; display: flex; align-items: center;
+}
+/* WP constrained layout caps direct children at content width — exempt the full-bleed layers. */
+.sheen-hero > .sheen-hero-video,
+.sheen-hero > .sheen-hero-overlay,
+.sheen-hero > .sheen-hero-badge,
+.sheen-hero > .sheen-scroll-cue { max-width: none !important; }
+.sheen-hero-video { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.sheen-hero-video video {
+	position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+	min-width: 100%; min-height: 100%; width: auto; height: auto;
+	object-fit: cover; object-position: center;
+}
+/* Gradient overlay: darker on the left where the copy sits, lighter over the footage. */
+.sheen-hero-overlay {
+	position: absolute; inset: 0; z-index: 1; pointer-events: none;
+	background:
+		linear-gradient(90deg, rgba(7,21,40,0.92) 0%, rgba(7,21,40,0.72) 42%, rgba(7,21,40,0.35) 100%),
+		linear-gradient(0deg, rgba(7,21,40,0.75) 0%, transparent 45%);
+}
+/* Subtle animated color wash on top of the video for brand depth. */
+.sheen-hero::after {
+	content: ""; position: absolute; inset: -20%; z-index: 2; pointer-events: none; mix-blend-mode: soft-light; opacity: 0.7;
+	background:
+		radial-gradient(40% 40% at 18% 30%, rgba(18,183,168,0.55), transparent 60%),
+		radial-gradient(42% 42% at 82% 70%, rgba(255,90,71,0.45), transparent 60%);
+	animation: sheen-aurora 22s ease-in-out infinite alternate;
+}
+@keyframes sheen-aurora {
+	0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-4%,3%) scale(1.12); }
+}
+.sheen-hero-content { position: relative; z-index: 3; width: 100%; }
+
+/* Floating discount badge */
+.sheen-hero-badge {
+	position: absolute; z-index: 4; right: 5%; bottom: 12%;
+	width: 132px; height: 132px; border-radius: 50%; display: grid; place-content: center; text-align: center;
+	background: linear-gradient(135deg, #FF5A47, #FF8A3D); color: #fff;
+	box-shadow: 0 20px 50px rgba(255,90,71,0.45); animation: sheen-badge-float 4s ease-in-out infinite;
+}
+.sheen-hero-badge span { font-family: var(--wp--preset--font-family--display); font-weight: 700; font-size: 2rem; line-height: 1; }
+.sheen-hero-badge small { display: block; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.2rem; }
+@media (max-width: 900px) { .sheen-hero-badge { width: 96px; height: 96px; right: 6%; bottom: 8%; } .sheen-hero-badge span { font-size: 1.4rem; } }
+
+/* Scroll cue */
+.sheen-scroll-cue { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); z-index: 4; width: 26px; height: 42px; border: 2px solid rgba(255,255,255,0.5); border-radius: 14px; }
+.sheen-scroll-cue span { position: absolute; left: 50%; top: 8px; width: 4px; height: 8px; margin-left: -2px; background: #fff; border-radius: 2px; animation: sheen-scroll 1.6s ease-in-out infinite; }
+@keyframes sheen-scroll { 0%,100% { opacity: 0; transform: translateY(0); } 40% { opacity: 1; } 80% { opacity: 0; transform: translateY(14px); } }
+
+.sheen-hero-media { position: relative; }
+.sheen-badge {
+	position: absolute !important; bottom: -22px; left: -18px;
+	width: 128px; height: 128px; display: grid; place-items: center;
+	border-radius: 50% !important; box-shadow: 0 18px 40px rgba(255,90,71,0.35);
+	animation: sheen-badge-float 4s ease-in-out infinite;
+}
+@keyframes sheen-badge-float { 0%,100%{ transform: translateY(0) rotate(-8deg);} 50%{ transform: translateY(-10px) rotate(-8deg);} }
+
+/* ---- Section rhythm + eyebrow ----------------------------------------- */
+.sheen-eyebrow { text-transform: uppercase; letter-spacing: 0.18em; font-weight: 600; font-size: 0.85rem; }
+
+/* ---- Cards: lift + shadow --------------------------------------------- */
+.is-style-lift { box-shadow: 0 10px 30px rgba(11,31,58,0.06); overflow: hidden; }
+.is-style-lift:hover { box-shadow: 0 26px 60px rgba(11,31,58,0.14); }
+
+/* ---- Stats ------------------------------------------------------------ */
+.sheen-stat .sheen-stat-num {
+	font-family: var(--wp--preset--font-family--display); font-weight: 700; line-height: 1;
+	font-size: clamp(2.5rem, 5vw, 3.75rem); color: var(--sheen-primary);
+}
+
+/* ---- Process (how it works) numbered steps ---------------------------- */
+.sheen-step-num {
+	width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center;
+	font-family: var(--wp--preset--font-family--display); font-weight: 700; font-size: 1.4rem;
+	background: var(--sheen-secondary); color: #fff; margin-bottom: 1rem;
+}
+
+/* ---- Pricing ---------------------------------------------------------- */
+.sheen-price-card { border: 1px solid var(--sheen-hairline); border-radius: 22px; transition: transform .2s ease, box-shadow .2s ease; }
+.sheen-price-card:hover { transform: translateY(-6px); box-shadow: 0 26px 60px rgba(11,31,58,0.14); }
+.sheen-price-card.is-featured { border-color: var(--sheen-primary); box-shadow: 0 20px 50px rgba(255,90,71,0.18); }
+.sheen-price-amount { font-family: var(--wp--preset--font-family--display); font-weight: 700; font-size: 3rem; line-height: 1; }
+.sheen-btn {
+	display: block; text-align: center; text-decoration: none;
+	padding: 0.9rem 1.25rem; border-radius: 12px; margin-top: 1.5rem;
+	font-family: var(--wp--preset--font-family--display); font-weight: 600;
+	transition: transform .15s ease, filter .15s ease;
+}
+.sheen-btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
+.sheen-btn-dark { background: var(--sheen-ink); color: #fff; }
+.sheen-btn-primary { background: var(--sheen-primary); color: #fff; }
+
+/* ---- Testimonials slider ---------------------------------------------- */
+.sheen-slider { position: relative; }
+.sheen-slider-nav { display: flex; gap: 0.75rem; justify-content: center; margin-top: 1.5rem; }
+.sheen-slider-nav button {
+	width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--sheen-hairline);
+	background: #fff; color: var(--sheen-ink); font-size: 1.2rem; cursor: pointer; transition: all .18s ease;
+}
+.sheen-slider-nav button:hover { background: var(--sheen-primary); color: #fff; border-color: var(--sheen-primary); }
+
+/* ---- FAQ accordion (native <details>) --------------------------------- */
+.sheen-faq details {
+	border: 1px solid var(--sheen-hairline); border-radius: 14px; padding: 1.1rem 1.4rem; margin-bottom: 1rem;
+	background: #fff; transition: box-shadow .2s ease;
+}
+.sheen-faq details[open] { box-shadow: 0 12px 30px rgba(11,31,58,0.08); }
+.sheen-faq summary {
+	cursor: pointer; font-family: var(--wp--preset--font-family--display); font-weight: 600; font-size: 1.1rem;
+	list-style: none; display: flex; justify-content: space-between; align-items: center;
+}
+.sheen-faq summary::-webkit-details-marker { display: none; }
+.sheen-faq summary::after { content: "+"; color: var(--sheen-primary); font-size: 1.6rem; line-height: 1; }
+.sheen-faq details[open] summary::after { content: "\2013"; }
+
+/* ---- Dark-mode toggle button ------------------------------------------ */
+.sheen-theme-toggle {
+	width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.25);
+	background: transparent; color: #fff; cursor: pointer; font-size: 1rem; line-height: 1;
+}
+.sheen-theme-toggle:hover { background: rgba(255,255,255,0.1); }
+
+/* ---- Live dark mode (data-theme on <html>) ---------------------------- */
+:root[data-theme="dark"] body { background: var(--sheen-ink-deep); color: #DCE6F0; }
+:root[data-theme="dark"] .sheen-services,
+:root[data-theme="dark"] .sheen-section-light { background: #0C2138 !important; }
+:root[data-theme="dark"] .sheen-services h2,
+:root[data-theme="dark"] .sheen-section-light h2,
+:root[data-theme="dark"] .sheen-section-light h3 { color: #fff; }
+:root[data-theme="dark"] .wp-block-column.is-style-lift,
+:root[data-theme="dark"] .sheen-price-card { background: #10294379 !important; border-color: #1E3350 !important; }
+:root[data-theme="dark"] .sheen-faq details,
+:root[data-theme="dark"] .sheen-slider-nav button { background: #0C2138; color: #DCE6F0; border-color: #1E3350; }
+/* Card headings/text must stay legible on dark cards. */
+:root[data-theme="dark"] .sheen-services h3,
+:root[data-theme="dark"] .sheen-section-light .wp-block-column h3,
+:root[data-theme="dark"] .sheen-price-card h3,
+:root[data-theme="dark"] .sheen-slide p { color: #fff !important; }
+:root[data-theme="dark"] .sheen-services .wp-block-column p,
+:root[data-theme="dark"] .sheen-price-card li,
+:root[data-theme="dark"] .sheen-faq p { color: #AEBECE !important; }
+
+/* ---- Lenis smooth scroll (required base styles) ----------------------- */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ---- Preloader -------------------------------------------------------- */
+.sheen-preloader {
+	position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center;
+	background: #071528; transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+.sheen-preloader.is-hidden { opacity: 0; visibility: hidden; }
+.sheen-preloader-inner { text-align: center; }
+.sheen-preloader-mark {
+	font-family: var(--wp--preset--font-family--display); font-weight: 700; font-size: 2rem; color: #fff;
+	letter-spacing: -0.02em; display: block; margin-bottom: 1.1rem;
+	background: linear-gradient(90deg,#12B7A8,#FF5A47,#FFD23F,#12B7A8); background-size: 300% 100%;
+	-webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+	animation: sheen-shimmer 2.2s linear infinite;
+}
+@keyframes sheen-shimmer { to { background-position: 300% 0; } }
+.sheen-preloader-bar { display: block; width: 180px; height: 3px; background: rgba(255,255,255,0.15); border-radius: 3px; margin: 0 auto; overflow: hidden; }
+.sheen-preloader-bar > span { display: block; height: 100%; width: 40%; background: #FF5A47; border-radius: 3px; animation: sheen-load 1s ease-in-out infinite; }
+@keyframes sheen-load { 0%{ transform: translateX(-120%);} 100%{ transform: translateX(360%);} }
+
+/* ---- Custom cursor + magnetic ----------------------------------------- */
+.sheen-has-cursor { cursor: none; }
+.sheen-has-cursor a, .sheen-has-cursor button, .sheen-has-cursor .sheen-btn, .sheen-has-cursor .wp-element-button { cursor: none; }
+.sheen-cursor, .sheen-cursor-dot { position: fixed; top: 0; left: 0; z-index: 9998; pointer-events: none; border-radius: 50%; }
+.sheen-cursor { width: 36px; height: 36px; border: 1.5px solid rgba(255,90,71,0.9); transition: width .2s, height .2s, background .2s, border-color .2s; }
+.sheen-cursor.is-active { width: 56px; height: 56px; background: rgba(255,90,71,0.12); border-color: #12B7A8; }
+.sheen-cursor-dot { width: 6px; height: 6px; background: #FF5A47; }
+.sheen-has-cursor a, .sheen-has-cursor button, .sheen-has-cursor .sheen-btn, .sheen-has-cursor .wp-element-button { transition: transform .18s cubic-bezier(.2,.8,.2,1); }
+@media (pointer: coarse) { .sheen-cursor, .sheen-cursor-dot { display: none; } }
+
+/* ---- Word-by-word reveal ---------------------------------------------- */
+.sheen-js .sheen-splitwords { opacity: 0; }
+.sheen-word { display: inline-block; overflow: hidden; vertical-align: top; line-height: 1.05; }
+.sheen-word > span { display: inline-block; will-change: transform; }
+
+/* ---- Header shrink on scroll ------------------------------------------ */
+.sheen-header .sheen-nav { transition: padding .25s ease, background-color .25s ease; }
+.sheen-header.is-scrolled .sheen-utilitybar { display: none; }
+.sheen-header.is-scrolled .sheen-nav { padding-top: 0.55rem !important; padding-bottom: 0.55rem !important; box-shadow: 0 8px 30px rgba(7,21,40,0.25); }
+
+/* ---- Marquee ---------------------------------------------------------- */
+.sheen-marquee { overflow: hidden; white-space: nowrap; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.sheen-marquee-track { display: inline-flex; gap: 3.5rem; align-items: center; animation: sheen-marquee 26s linear infinite; }
+.sheen-marquee:hover .sheen-marquee-track { animation-play-state: paused; }
+.sheen-marquee-track span { color: #5A6B7B; font-weight: 600; font-size: 1.05rem; display: inline-flex; gap: .5rem; align-items: center; }
+@keyframes sheen-marquee { to { transform: translateX(-50%); } }
+
+/* ---- Scroll progress bar ---------------------------------------------- */
+.sheen-progress {
+	position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: 9997;
+	transform: scaleX(0); transform-origin: 0 50%;
+	background: linear-gradient(90deg, #12B7A8, #FF5A47, #FFD23F);
+}
+
+/* ---- Image carousel --------------------------------------------------- */
+.sheen-carousel { position: relative; overflow: hidden; border-radius: 24px; box-shadow: 0 30px 70px rgba(11,31,58,0.20); }
+.sheen-carousel-track { display: flex; transition: transform 0.6s cubic-bezier(.7,0,.2,1); }
+.sheen-carousel-slide { min-width: 100%; position: relative; }
+.sheen-carousel-slide img { width: 100%; height: 560px; object-fit: cover; display: block; }
+.sheen-carousel-cap {
+	position: absolute; left: 0; right: 0; bottom: 0; padding: 2.5rem 2.5rem 2rem; color: #fff;
+	background: linear-gradient(0deg, rgba(7,21,40,0.88) 0%, rgba(7,21,40,0.35) 55%, transparent 100%);
+}
+.sheen-carousel-cap h3 { font-family: var(--wp--preset--font-family--display); font-size: 1.6rem; margin: 0 0 .35rem; color: #fff; }
+.sheen-carousel-cap p { margin: 0; color: #C7D4E2; }
+.sheen-carousel-prev, .sheen-carousel-next {
+	position: absolute; top: 50%; transform: translateY(-50%); z-index: 4;
+	width: 52px; height: 52px; border-radius: 50%; border: none; cursor: pointer;
+	background: rgba(255,255,255,0.9); color: #0B1F3A; font-size: 1.4rem; display: grid; place-items: center;
+	transition: background .18s, transform .18s;
+}
+.sheen-carousel-prev { left: 1.25rem; } .sheen-carousel-next { right: 1.25rem; }
+.sheen-carousel-prev:hover, .sheen-carousel-next:hover { background: #FF5A47; color: #fff; }
+.sheen-carousel-dots { position: absolute; left: 0; right: 0; bottom: 1.25rem; z-index: 4; display: flex; gap: .5rem; justify-content: center; }
+.sheen-carousel-dots .sheen-dot { width: 10px; height: 10px; border-radius: 50%; border: none; background: rgba(255,255,255,0.5); cursor: pointer; padding: 0; transition: background .2s, width .2s; }
+.sheen-carousel-dots .sheen-dot.is-active { background: #FF5A47; width: 26px; border-radius: 6px; }
+@media (max-width: 781px) { .sheen-carousel-slide img { height: 380px; } }
+
+/* ---- Long CTA --------------------------------------------------------- */
+.sheen-cta-long { padding-top: var(--wp--preset--spacing--80); padding-bottom: var(--wp--preset--spacing--80); }
+.sheen-cta-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 4rem; align-items: center; }
+.sheen-cta-eyebrow { text-transform: uppercase; letter-spacing: 0.18em; font-weight: 700; color: #fff; opacity: 0.9; margin: 0 0 0.75rem; }
+.sheen-cta-copy h2 { font-family: var(--wp--preset--font-family--display); font-weight: 700; color: #fff; font-size: clamp(2.25rem, 4.5vw, 3.5rem); line-height: 1.05; margin: 0 0 1.25rem; letter-spacing: -0.02em; }
+.sheen-cta-sub { color: #FFF1EC; font-size: 1.15rem; max-width: 30rem; margin: 0 0 1.5rem; }
+.sheen-cta-list { list-style: none; padding: 0; margin: 0 0 2rem; display: grid; gap: 0.65rem; color: #fff; font-weight: 500; }
+.sheen-cta-actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+.sheen-cta-btn-dark, .sheen-cta-btn-ghost { display: inline-block; text-decoration: none; padding: 1rem 1.75rem; border-radius: 999px; font-family: var(--wp--preset--font-family--display); font-weight: 600; transition: transform .15s ease; }
+.sheen-cta-btn-dark { background: #0B1F3A; color: #fff; }
+.sheen-cta-btn-ghost { background: rgba(255,255,255,0.16); color: #fff; border: 1px solid rgba(255,255,255,0.5); }
+.sheen-cta-btn-dark:hover, .sheen-cta-btn-ghost:hover { transform: translateY(-2px); }
+.sheen-cta-trust { margin: 1.5rem 0 0; color: #FFF1EC; font-size: 0.9rem; }
+/* Quote card (glass) */
+.sheen-cta-card { background: rgba(255,255,255,0.98); border-radius: 22px; padding: 2rem; box-shadow: 0 40px 80px rgba(120,30,10,0.28); }
+.sheen-cta-card h3 { font-family: var(--wp--preset--font-family--display); margin: 0 0 1.25rem; font-size: 1.5rem; color: #0B1F3A; }
+.sheen-cta-card label { display: block; font-size: 0.85rem; font-weight: 600; color: #5A6B7B; margin-bottom: 1rem; }
+.sheen-cta-card input, .sheen-cta-card select { width: 100%; margin-top: 0.35rem; padding: 0.8rem 0.9rem; border: 1px solid #E3EAF1; border-radius: 10px; font: inherit; color: #0B1F3A; background: #fff; }
+.sheen-cta-card-btn { display: block; text-align: center; text-decoration: none; margin-top: 0.5rem; padding: 0.95rem; border-radius: 12px; background: #FF5A47; color: #fff; font-family: var(--wp--preset--font-family--display); font-weight: 600; transition: filter .15s; }
+.sheen-cta-card-btn:hover { filter: brightness(1.06); }
+.sheen-cta-card-note { text-align: center; color: #8A99A8; font-size: 0.8rem; margin: 0.75rem 0 0; }
+
+/* ---- Select2 dropdown (brand theme) ----------------------------------- */
+.sheen-cta-card .select2-container { font-family: inherit; }
+.select2-container--default .select2-selection--single {
+	height: auto; border: 1px solid #E3EAF1; border-radius: 10px; padding: 0.72rem 0.9rem; background: #fff;
+	transition: border-color .15s, box-shadow .15s;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered { line-height: 1.3; color: #0B1F3A; padding: 0; font-weight: 500; }
+.select2-container--default .select2-selection--single .select2-selection__placeholder { color: #8A99A8; }
+.select2-container--default .select2-selection--single .select2-selection__arrow { height: 100%; top: 0; right: 10px; }
+.select2-container--default .select2-selection--single .select2-selection__arrow b { border-color: #5A6B7B transparent transparent; }
+.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b { border-color: transparent transparent #FF5A47; }
+.select2-container--default.select2-container--focus .select2-selection--single,
+.select2-container--default.select2-container--open .select2-selection--single { border-color: #FF5A47; box-shadow: 0 0 0 3px rgba(255,90,71,0.15); }
+.select2-dropdown { border: 1px solid #E3EAF1; border-radius: 12px; overflow: hidden; box-shadow: 0 22px 55px rgba(11,31,58,0.16); }
+.select2-results__option { padding: 0.65rem 0.9rem; color: #0B1F3A; }
+.select2-container--default .select2-results__option--highlighted[aria-selected] { background: #FF5A47; color: #fff; }
+.select2-container--default .select2-results__option[aria-selected=true] { background: #FFF1EC; color: #FF5A47; font-weight: 600; }
+
+/* All quote/booking form controls size padding inside their width. */
+.sheen-cta-card input, .sheen-cta-card select, .sheen-cta-card textarea,
+.sheen-form input, .sheen-form select, .sheen-form textarea,
+input.sheen-datepicker { box-sizing: border-box; }
+
+/* ---- Datepicker input: calendar icon ---------------------------------- */
+input.sheen-datepicker {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23FF5A47' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 0.9rem center;
+	background-size: 18px 18px;
+	padding-right: 2.6rem !important;
+	cursor: pointer;
+}
+
+/* ---- Flatpickr datepicker (brand theme) ------------------------------- */
+.flatpickr-calendar { border-radius: 14px; box-shadow: 0 22px 55px rgba(11,31,58,0.18); border: 1px solid #E3EAF1; font-family: var(--wp--preset--font-family--body); }
+.flatpickr-months .flatpickr-month, .flatpickr-current-month, .flatpickr-monthDropdown-months { color: #0B1F3A; fill: #0B1F3A; }
+.flatpickr-months .flatpickr-prev-month svg, .flatpickr-months .flatpickr-next-month svg { fill: #0B1F3A; }
+.flatpickr-months .flatpickr-prev-month:hover svg, .flatpickr-months .flatpickr-next-month:hover svg { fill: #FF5A47; }
+.flatpickr-weekday { color: #5A6B7B; font-weight: 600; }
+.flatpickr-day { color: #0B1F3A; border-radius: 8px; }
+.flatpickr-day:hover { background: #FFF1EC; border-color: #FFF1EC; }
+.flatpickr-day.today { border-color: #12B7A8; }
+.flatpickr-day.selected, .flatpickr-day.selected:hover, .flatpickr-day.startRange, .flatpickr-day.endRange {
+	background: #FF5A47; border-color: #FF5A47; color: #fff;
+}
+.flatpickr-day.flatpickr-disabled, .flatpickr-day.prevMonthDay, .flatpickr-day.nextMonthDay { color: #C3CCD6; }
+
+/* ---- Mega footer ------------------------------------------------------ */
+.sheen-footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1.2fr; gap: 2.5rem; }
+.sheen-footer-logo { font-family: var(--wp--preset--font-family--display); font-weight: 700; font-size: 1.4rem; color: #fff; margin-bottom: 0.9rem; }
+.sheen-footer-blurb { color: #AEBECE; font-size: 0.95rem; line-height: 1.7; margin: 0 0 1.5rem; max-width: 22rem; }
+.sheen-newsletter label { display: block; color: #DCE6F0; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.6rem; }
+.sheen-newsletter-row { display: flex; gap: 0.5rem; max-width: 22rem; }
+.sheen-newsletter-row input { flex: 1; padding: 0.75rem 0.9rem; border-radius: 10px; border: 1px solid #24405f; background: #0E2036; color: #fff; }
+.sheen-newsletter-row button { padding: 0.75rem 1.1rem; border: none; border-radius: 10px; background: #FF5A47; color: #fff; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.sheen-newsletter-row button:hover { background: #E8442F; }
+.sheen-social { display: flex; gap: 0.6rem; margin-top: 1.5rem; }
+.sheen-social a { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: #14293f; color: #fff; text-decoration: none; font-weight: 700; transition: background .18s; }
+.sheen-social a:hover { background: #12B7A8; }
+.sheen-footer-col h4 { font-family: var(--wp--preset--font-family--display); color: #fff; font-size: 1rem; margin: 0 0 1.1rem; }
+.sheen-footer-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.7rem; }
+.sheen-footer-col a { color: #AEBECE; text-decoration: none; transition: color .15s; }
+.sheen-footer-col a:hover { color: #12B7A8; }
+.sheen-footer-contact li { color: #AEBECE; }
+.sheen-footer-cta { display: inline-block; margin-top: 1.25rem; color: #FF5A47; font-weight: 700; text-decoration: none; }
+.sheen-footer-bottom { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center; margin-top: var(--wp--preset--spacing--60); padding-top: var(--wp--preset--spacing--40); border-top: 1px solid #1E3350; color: #8FA2B5; font-size: 0.85rem; }
+.sheen-footer-legal { display: flex; gap: 1.5rem; }
+.sheen-footer-legal a { color: #8FA2B5; text-decoration: none; }
+.sheen-footer-legal a:hover { color: #fff; }
+.sheen-footer-credit { color: #6E8199; }
+@media (max-width: 1000px) {
+	.sheen-cta-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+	.sheen-footer-top { grid-template-columns: 1fr 1fr; }
+	.sheen-footer-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 600px) {
+	.sheen-footer-top { grid-template-columns: 1fr; }
+	.sheen-footer-bottom { flex-direction: column; text-align: center; }
+}
+
+/* ---- Inner page hero -------------------------------------------------- */
+.sheen-pagehero { position: relative; overflow: hidden; }
+.sheen-pagehero::before {
+	content: ""; position: absolute; inset: -30%; z-index: 0; pointer-events: none; opacity: 0.8;
+	background: radial-gradient(40% 40% at 20% 30%, rgba(18,183,168,0.35), transparent 60%), radial-gradient(40% 40% at 82% 70%, rgba(255,90,71,0.30), transparent 60%);
+	animation: sheen-aurora 22s ease-in-out infinite alternate;
+}
+.sheen-pagehero > * { position: relative; z-index: 1; }
+.sheen-pagehero .wp-block-post-title { color: #fff; }
+
+/* ---- Contact / booking form ------------------------------------------- */
+.sheen-contact-grid { display: grid; grid-template-columns: 1.4fr 0.9fr; gap: 3rem; align-items: start; }
+.sheen-form label { display: block; font-size: 0.85rem; font-weight: 600; color: #5A6B7B; margin-bottom: 1rem; }
+.sheen-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.sheen-form input, .sheen-form textarea, .sheen-form select { width: 100%; margin-top: 0.35rem; padding: 0.8rem 0.9rem; border: 1px solid #E3EAF1; border-radius: 10px; font: inherit; color: #0B1F3A; background: #fff; }
+.sheen-form input:focus, .sheen-form textarea:focus { outline: none; border-color: #FF5A47; box-shadow: 0 0 0 3px rgba(255,90,71,0.15); }
+.sheen-form-submit { width: 100%; margin-top: 0.5rem; padding: 1rem; border: none; border-radius: 12px; background: #FF5A47; color: #fff; font-family: var(--wp--preset--font-family--display); font-weight: 600; font-size: 1.05rem; cursor: pointer; transition: filter .15s; }
+.sheen-form-submit:hover { filter: brightness(1.06); }
+.sheen-form-note { text-align: center; color: #8A99A8; font-size: 0.85rem; margin: 0.85rem 0 0; }
+.sheen-contact-aside { background: var(--sheen-surface); border-radius: 20px; padding: 2rem; }
+.sheen-contact-aside h3 { font-family: var(--wp--preset--font-family--display); margin: 0 0 .5rem; }
+.sheen-contact-list { list-style: none; padding: 0; margin: 1.25rem 0; display: grid; gap: 1rem; }
+.sheen-contact-list li { display: flex; gap: 0.75rem; align-items: center; color: #0B1F3A; }
+.sheen-contact-list a { color: #0B1F3A; text-decoration: none; }
+.sheen-contact-list a:hover { color: #FF5A47; }
+.sheen-contact-badges { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+.sheen-contact-badges span { background: #fff; border: 1px solid #E3EAF1; border-radius: 999px; padding: 0.4rem 0.9rem; font-size: 0.85rem; color: #5A6B7B; }
+@media (max-width: 900px) { .sheen-contact-grid { grid-template-columns: 1fr; } .sheen-form-row { grid-template-columns: 1fr; } }
+
+/* ======================================================================
+   CAR-DETAILING NICHE (.sheen-car) — dark, electric-blue demo
+   Proves the multi-niche angle: same theme + patterns, new identity.
+   ====================================================================== */
+.sheen-car {
+	--car-bg: #0A0E17; --car-surface: #121A2B; --car-line: #1E2A42;
+	--car-blue: #2E6BFF; --car-cyan: #00D4FF; --car-chrome: #C7D0DD;
+	background: var(--car-bg); color: #C7D0DD;
+	font-family: var(--wp--preset--font-family--body);
+}
+.sheen-car h1, .sheen-car h2, .sheen-car h3 { font-family: var(--wp--preset--font-family--display); color: #fff; letter-spacing: -0.02em; }
+.sheen-car .car-eyebrow { text-transform: uppercase; letter-spacing: 0.2em; font-weight: 700; font-size: 0.8rem; color: var(--car-cyan); }
+.sheen-car a { color: var(--car-cyan); }
+.sheen-car .car-wrap { max-width: 1240px; margin: 0 auto; padding-inline: 1.5rem; }
+
+/* Header */
+.sheen-car-header { position: sticky; top: 0; z-index: 50; background: rgba(10,14,23,0.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--car-line); }
+.sheen-car-header .car-wrap { display: flex; align-items: center; justify-content: space-between; padding-block: 1.1rem; }
+.sheen-car-logo { font-family: var(--wp--preset--font-family--display); font-weight: 700; font-size: 1.3rem; color: #fff; }
+.sheen-car-logo span { color: var(--car-blue); }
+.sheen-car-nav { display: flex; gap: 2rem; align-items: center; }
+.sheen-car-nav a { color: #C7D0DD; text-decoration: none; font-weight: 500; }
+.sheen-car-nav a:hover { color: #fff; }
+.sheen-car-btn { display: inline-block; padding: 0.8rem 1.5rem; border-radius: 999px; text-decoration: none; font-weight: 600; font-family: var(--wp--preset--font-family--display); background: linear-gradient(135deg, var(--car-blue), var(--car-cyan)); color: #fff !important; box-shadow: 0 10px 30px rgba(46,107,255,0.4); transition: transform .15s; }
+.sheen-car-btn:hover { transform: translateY(-2px); }
+
+/* Hero */
+.sheen-car-hero { position: relative; min-height: 92vh; display: flex; align-items: center; overflow: hidden; }
+.sheen-car-hero img.car-hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.sheen-car-hero::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(10,14,23,0.95) 0%, rgba(10,14,23,0.75) 45%, rgba(10,14,23,0.35) 100%), radial-gradient(60% 60% at 80% 30%, rgba(46,107,255,0.35), transparent 70%); }
+.sheen-car-hero .car-wrap { position: relative; z-index: 2; }
+.sheen-car-hero h1 { font-size: clamp(3rem, 7vw, 5.5rem); line-height: 1; margin: 0.75rem 0 1.25rem; }
+.sheen-car-hero .car-blue-text { background: linear-gradient(135deg, var(--car-blue), var(--car-cyan)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.sheen-car-hero p.lead { font-size: 1.2rem; max-width: 34rem; color: #AEB9CC; margin: 0 0 2rem; }
+.sheen-car-hero .car-hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.sheen-car-btn-ghost { display: inline-block; padding: 0.8rem 1.5rem; border-radius: 999px; text-decoration: none; font-weight: 600; border: 1px solid var(--car-line); color: #fff; }
+
+/* Section shell */
+.sheen-car-section { padding-block: 6rem; }
+.sheen-car-section.alt { background: var(--car-surface); }
+.sheen-car-head { text-align: center; max-width: 40rem; margin: 0 auto 3.5rem; }
+.sheen-car-head h2 { font-size: clamp(2rem, 4vw, 3rem); margin: 0.5rem 0 0.75rem; }
+.sheen-car-head p { color: #AEB9CC; margin: 0; }
+
+/* Cards / grid */
+.sheen-car-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
+.sheen-car-card { background: var(--car-surface); border: 1px solid var(--car-line); border-radius: 18px; overflow: hidden; transition: transform .2s, border-color .2s; }
+.sheen-car-section.alt .sheen-car-card { background: #0E1524; }
+.sheen-car-card:hover { transform: translateY(-6px); border-color: var(--car-blue); }
+.sheen-car-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
+.sheen-car-card .car-card-body { padding: 1.5rem; }
+.sheen-car-card h3 { margin: 0 0 0.5rem; font-size: 1.35rem; }
+.sheen-car-card p { color: #AEB9CC; margin: 0 0 1rem; }
+.sheen-car-card .car-price { color: var(--car-cyan); font-weight: 700; font-family: var(--wp--preset--font-family--display); }
+
+/* Stats */
+.sheen-car-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
+.sheen-car-stats .num { font-family: var(--wp--preset--font-family--display); font-weight: 700; font-size: clamp(2.25rem,4vw,3.25rem); background: linear-gradient(135deg,var(--car-blue),var(--car-cyan)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.sheen-car-stats p { color: #AEB9CC; margin: 0.35rem 0 0; }
+
+/* Pricing */
+.sheen-car-pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; align-items: stretch; }
+.sheen-car-plan { background: var(--car-surface); border: 1px solid var(--car-line); border-radius: 18px; padding: 2rem; }
+.sheen-car-plan.featured { border-color: var(--car-blue); box-shadow: 0 20px 60px rgba(46,107,255,0.25); }
+.sheen-car-plan .amt { font-family: var(--wp--preset--font-family--display); font-weight: 700; font-size: 2.75rem; color: #fff; }
+.sheen-car-plan ul { list-style: none; padding: 0; margin: 1.25rem 0; display: grid; gap: 0.6rem; }
+.sheen-car-plan li::before { content: "▸ "; color: var(--car-cyan); }
+
+/* CTA + footer */
+.sheen-car-cta { text-align: center; background: linear-gradient(135deg, #12224A, #0A0E17); }
+.sheen-car-cta h2 { font-size: clamp(2rem,4vw,3rem); }
+.sheen-car-footer { background: #070A11; border-top: 1px solid var(--car-line); padding-block: 2.5rem; text-align: center; color: #7C8AA3; }
+
+@media (max-width: 900px) {
+	.sheen-car-grid, .sheen-car-pricing { grid-template-columns: 1fr; }
+	.sheen-car-stats { grid-template-columns: 1fr 1fr; }
+	.sheen-car-nav { display: none; }
+}
+
+/* ---- Section grids ---------------------------------------------------- */
+.sheen-stats > div,
+.sheen-process-grid,
+.sheen-pricing-grid,
+.sheen-split { width: 100%; }
+
+/* ---- Responsive ------------------------------------------------------- */
+@media (max-width: 900px) {
+	.sheen-stats > div { grid-template-columns: repeat(2,1fr) !important; gap: 2.5rem 1rem !important; }
+	.sheen-process-grid { grid-template-columns: 1fr !important; }
+	.sheen-pricing-grid { grid-template-columns: 1fr !important; }
+	.sheen-split { grid-template-columns: 1fr !important; gap: 2rem !important; }
+	.sheen-split img { height: 340px !important; }
+}
+@media (max-width: 781px) {
+	.sheen-badge { width: 100px; height: 100px; bottom: -14px; left: 8px; }
+	.sheen-header .sheen-nav .wp-block-group { justify-content: center; }
+}

@@ -1,0 +1,37 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Sheen — Dark",
+	"styles": {
+		"color": {
+			"background": "var(--wp--preset--color--ink-deep)",
+			"text": "#DCE6F0"
+		},
+		"elements": {
+			"heading": {
+				"color": { "text": "#FFFFFF" }
+			},
+			"link": {
+				"color": { "text": "var(--wp--preset--color--secondary)" },
+				":hover": { "color": { "text": "var(--wp--preset--color--accent)" } }
+			},
+			"button": {
+				"color": {
+					"background": "var(--wp--preset--color--primary)",
+					"text": "#FFFFFF"
+				},
+				":hover": {
+					"color": {
+						"background": "var(--wp--preset--color--primary-dark)",
+						"text": "#FFFFFF"
+					}
+				}
+			}
+		},
+		"blocks": {
+			"core/site-title": {
+				"color": { "text": "#FFFFFF" }
+			}
+		}
+	}
+}
