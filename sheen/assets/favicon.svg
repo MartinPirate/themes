@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="112" fill="#0B1F3A"/>
+  <!-- primary sparkle (coral) -->
+  <path d="M256 96 L282 230 L416 256 L282 282 L256 416 L230 282 L96 256 L230 230 Z" fill="#FF5A47"/>
+  <!-- accent sparkle (teal) -->
+  <path d="M398 104 L408 150 L454 160 L408 170 L398 216 L388 170 L342 160 L388 150 Z" fill="#12B7A8"/>
+</svg>

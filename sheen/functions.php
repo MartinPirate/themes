@@ -81,6 +81,24 @@ if ( ! function_exists( 'sheen_js_class' ) ) {
 }
 add_action( 'wp_head', 'sheen_js_class', 0 );
 
+if ( ! function_exists( 'sheen_favicon' ) ) {
+	/**
+	 * Output theme favicons (SVG + ICO + Apple touch icon). Only runs if the
+	 * site doesn't already have a Site Icon set in the admin, so we never
+	 * override a client's own icon.
+	 */
+	function sheen_favicon() {
+		if ( function_exists( 'has_site_icon' ) && has_site_icon() ) {
+			return;
+		}
+		$u = get_theme_file_uri( 'assets' );
+		echo '<link rel="icon" href="' . esc_url( $u . '/favicon.svg' ) . '" type="image/svg+xml">' . "\n";
+		echo '<link rel="icon" href="' . esc_url( $u . '/favicon.ico' ) . '" sizes="any">' . "\n";
+		echo '<link rel="apple-touch-icon" href="' . esc_url( $u . '/apple-touch-icon.png' ) . '">' . "\n";
+	}
+}
+add_action( 'wp_head', 'sheen_favicon', 5 );
+
 if ( ! function_exists( 'sheen_body_open_markup' ) ) {
 	/**
 	 * Preloader overlay + custom cursor elements. JS reveals/drives them; both
