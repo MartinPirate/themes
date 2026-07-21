@@ -222,7 +222,30 @@ html.lenis, html.lenis body { height: auto; }
 /* ---- Header shrink on scroll ------------------------------------------ */
 .sheen-header .sheen-nav { transition: padding .25s ease, background-color .25s ease; }
 .sheen-header.is-scrolled .sheen-utilitybar { display: none; }
-.sheen-header.is-scrolled .sheen-nav { padding-top: 0.55rem !important; padding-bottom: 0.55rem !important; box-shadow: 0 8px 30px rgba(7,21,40,0.25); }
+.sheen-header.is-scrolled .sheen-nav { padding-top: 0.55rem !important; padding-bottom: 0.55rem !important; box-shadow: 0 8px 30px rgba(7,21,40,0.15); }
+
+/* ---- Header theming: light in light mode, navy in dark mode ----------- */
+/* Light mode (default): light bars + dark text */
+.sheen-header .sheen-utilitybar { background: var(--sheen-surface) !important; border-bottom: 1px solid var(--sheen-hairline); }
+.sheen-header .sheen-nav { background: #fff !important; border-bottom: 1px solid var(--sheen-hairline); }
+.sheen-header .sheen-utilitybar p,
+.sheen-header .wp-block-site-title a,
+.sheen-header .sheen-nav .wp-block-navigation a,
+.sheen-header .sheen-nav > .wp-block-group p { color: var(--sheen-ink) !important; }
+.sheen-header .sheen-nav .has-secondary-color { color: var(--sheen-secondary) !important; } /* keep "Call to book" teal */
+.sheen-header .sheen-theme-toggle { color: var(--sheen-ink); border-color: rgba(11,31,58,0.22); }
+.sheen-header .sheen-theme-toggle:hover { background: rgba(11,31,58,0.06); }
+.sheen-nav .wp-block-navigation a:hover { color: var(--sheen-primary) !important; }
+
+/* Dark mode: navy bars + light text (the original brand bar) */
+:root[data-theme="dark"] .sheen-header .sheen-utilitybar { background: var(--sheen-ink-deep) !important; border-bottom-color: #1E3350; }
+:root[data-theme="dark"] .sheen-header .sheen-nav { background: var(--sheen-ink) !important; border-bottom-color: #1E3350; }
+:root[data-theme="dark"] .sheen-header .sheen-utilitybar p,
+:root[data-theme="dark"] .sheen-header .wp-block-site-title a,
+:root[data-theme="dark"] .sheen-header .sheen-nav .wp-block-navigation a,
+:root[data-theme="dark"] .sheen-header .sheen-nav > .wp-block-group p { color: #fff !important; }
+:root[data-theme="dark"] .sheen-header .sheen-theme-toggle { color: #fff; border-color: rgba(255,255,255,0.25); }
+:root[data-theme="dark"] .sheen-header .sheen-theme-toggle:hover { background: rgba(255,255,255,0.1); }
 
 /* ---- Marquee ---------------------------------------------------------- */
 .sheen-marquee { overflow: hidden; white-space: nowrap; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
