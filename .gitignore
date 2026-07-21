@@ -1,6 +1,9 @@
 # Build artifacts
 *.zip
 
+# Internal planning (not shipped)
+PLAN.md
+
 # OS / editor
 .DS_Store
 Thumbs.db

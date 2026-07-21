@@ -6,6 +6,8 @@ A collection of WordPress themes.
 
 **Sheen** is a bold, vibrant, multi-niche **Full Site Editing (FSE) block theme** for service businesses. It's the first theme in this repo.
 
+![Sheen theme preview](sheen/screenshot.png)
+
 - **Flagship niche:** cleaning services (SparkleWave demo)
 - **Second niche:** car detailing (ApexShine demo) — dark / electric-blue style variation + demo template
 - **Light + dark** style variations, switchable in the Site Editor
@@ -21,7 +23,7 @@ Then edit everything under **Appearance → Editor**.
 
 ### Develop
 
-The theme source lives in [`sheen/`](sheen/). See [`PLAN.md`](PLAN.md) for the product plan and roadmap.
+The theme source lives in [`sheen/`](sheen/).
 
 ### License
 
