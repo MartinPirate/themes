@@ -75,7 +75,7 @@
 				<li><span class="tick">✓</span> Itemised line by line — no hidden fees</li>
 				<li><span class="tick">✓</span> Instant, downloadable PDF receipt</li>
 				<li><span class="tick">✓</span> Tax / VAT ready for your records</li>
-				<li><span class="tick">✓</span> Pay your way — M-Pesa, card or bank</li>
+				<li><span class="tick">✓</span> Pay your way — card, ACH or Apple Pay</li>
 			</ul>
 			<a class="sheen-inv-cta" href="#booking">Get your quote →</a>
 		</div>
@@ -106,7 +106,7 @@
 				</div>
 				<div class="sheen-inv-perf"><span class="line"></span></div>
 				<div class="sheen-inv-foot">
-					<div class="pays"><span class="chip">M-Pesa</span><span class="chip">Card</span><span class="chip">Bank</span></div>
+					<div class="pays"><span class="chip">Card</span><span class="chip">ACH</span><span class="chip">Apple Pay</span></div>
 					<div class="meta">Issued Jul 21</div>
 				</div>
 			</div>
